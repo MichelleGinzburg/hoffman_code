@@ -198,3 +198,58 @@ print("Postorder Traversal:", postorder_result)
 output_text_hex=""+encodede_text_hex+"\n"+str(buffering)+"\n"+inorder_result+"\n"+postorder_result
 print("***")
 print(output_text_hex)
+
+"""
+def assemble_tree_from_traversals(inorder, postorder):
+    
+    Assemble a binary tree using inorder and postorder traversals.
+    Prints the reconstructed tree.
+
+    :param inorder: A string of bit sequences representing the inorder traversal.
+    :param postorder: A string of bit sequences representing the postorder traversal.
+    
+    if not inorder or not postorder:
+        raise ValueError("Both inorder and postorder traversals must be non-empty.")
+
+    def helper(in_left, in_right):
+        nonlocal post_idx
+        if in_left > in_right:
+            return None
+
+        # The current root is the last element in postorder
+        root_value = postorder[post_idx]
+        post_idx -= 1
+
+        # Create the root node
+        root = Node(symbol=root_value)
+
+        # Find the index of the root in the inorder list
+        index = idx_map[root_value]
+
+        # Recursively build the right and left subtrees
+        root.right = helper(index + 1, in_right)
+        root.left = helper(in_left, index - 1)
+
+        return root
+
+    # Ensure traversals are valid
+    if len(inorder) != len(postorder):
+        raise ValueError("Inorder and postorder traversals must have the same length.")
+
+    # Map each value to its index in the inorder traversal
+    idx_map = {value: idx for idx, value in enumerate(inorder)}
+    post_idx = len(postorder) - 1
+
+    # Construct the tree
+    reconstructed_root = helper(0, len(inorder) - 1)
+
+    # Print the final tree
+    print_tree(reconstructed_root)
+
+    return reconstructed_root
+
+
+# Example usage of the function
+reconstructed_root = assemble_tree_from_traversals(inorder_result, postorder_result)
+
+"""
